@@ -1,0 +1,7 @@
+id,prompt,category,expected_keywords,description
+1,What is artificial intelligence?,general,AI,intelligence,machine,Basic AI question
+2,Explain quantum computing,technical,quantum,computing,qubit,Technical question about quantum computing
+3,Write a Python function to reverse a string,coding,Python,function,reverse,Coding request
+4,What are the benefits of cloud computing?,general,cloud,computing,benefits,General technology question
+5,How does machine learning work?,technical,machine,learning,algorithm,Technical ML question
+
