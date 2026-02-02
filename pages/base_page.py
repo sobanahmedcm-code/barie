@@ -5,10 +5,7 @@ import logging
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException, NoSuchElementException
-from selenium.webdriver.common.action_chains import ActionChains
-from selenium.webdriver.common.keys import Keys
-from config.config import EXPLICIT_WAIT, SCREENSHOTS_DIR, SCREENSHOT_ON_FAILURE
-from datetime import datetime
+from config.config import EXPLICIT_WAIT
 
 
 class BasePage:
@@ -18,7 +15,6 @@ class BasePage:
         self.driver = driver
         self.wait = WebDriverWait(driver, EXPLICIT_WAIT)
         self.logger = logging.getLogger(self.__class__.__name__)
-        self.actions = ActionChains(driver)
     
     def navigate_to(self, url):
         """Navigate to a specific URL"""
@@ -45,17 +41,6 @@ class BasePage:
         except TimeoutException:
             self.logger.error(f"Element not found: {locator}")
             raise
-    
-    def find_elements(self, locator, timeout=None):
-        """Find multiple elements with explicit wait"""
-        wait_time = timeout or EXPLICIT_WAIT
-        wait = WebDriverWait(self.driver, wait_time)
-        try:
-            elements = wait.until(EC.presence_of_all_elements_located(locator))
-            return elements
-        except TimeoutException:
-            self.logger.warning(f"Elements not found: {locator}")
-            return []
     
     def click_element(self, locator, timeout=None):
         """Click on an element"""
@@ -99,64 +84,4 @@ class BasePage:
         except TimeoutException:
             return False
     
-    def is_element_visible(self, locator, timeout=None):
-        """Check if element is visible"""
-        try:
-            wait_time = timeout or EXPLICIT_WAIT
-            wait = WebDriverWait(self.driver, wait_time)
-            wait.until(EC.visibility_of_element_located(locator))
-            return True
-        except TimeoutException:
-            return False
-    
-    def wait_for_element_invisible(self, locator, timeout=None):
-        """Wait for element to become invisible"""
-        wait_time = timeout or EXPLICIT_WAIT
-        wait = WebDriverWait(self.driver, wait_time)
-        try:
-            wait.until(EC.invisibility_of_element_located(locator))
-        except TimeoutException:
-            self.logger.warning(f"Element still visible: {locator}")
-    
-    def get_attribute(self, locator, attribute, timeout=None):
-        """Get attribute value from an element"""
-        try:
-            element = self.find_element(locator, timeout)
-            return element.get_attribute(attribute)
-        except (TimeoutException, NoSuchElementException) as e:
-            self.logger.error(f"Failed to get attribute from element {locator}: {str(e)}")
-            raise
-    
-    def take_screenshot(self, filename=None):
-        """Take a screenshot"""
-        if not filename:
-            timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-            filename = f"screenshot_{timestamp}.png"
-        
-        filepath = SCREENSHOTS_DIR / filename
-        self.driver.save_screenshot(str(filepath))
-        self.logger.info(f"Screenshot saved: {filepath}")
-        return filepath
-    
-    def scroll_to_element(self, locator):
-        """Scroll to an element"""
-        try:
-            element = self.find_element(locator)
-            self.driver.execute_script("arguments[0].scrollIntoView(true);", element)
-            self.logger.info(f"Scrolled to element: {locator}")
-        except (TimeoutException, NoSuchElementException) as e:
-            self.logger.error(f"Failed to scroll to element {locator}: {str(e)}")
-            raise
-    
-    def execute_javascript(self, script, *args):
-        """Execute JavaScript code"""
-        return self.driver.execute_script(script, *args)
-    
-    def get_current_url(self):
-        """Get current page URL"""
-        return self.driver.current_url
-    
-    def get_page_title(self):
-        """Get page title"""
-        return self.driver.title
 

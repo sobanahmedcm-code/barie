@@ -1,0 +1,18 @@
+step,function_name,test_type,prompt,id
+1,notion-get-self,positive,"""Retrieve my account details to verify API connection and workspace access.""",NTN-SELF-POS-001
+2,notion-get-users,positive,"""Get a list of all users in this workspace to check available collaborators.""",NTN-USRS-POS-002
+3,notion-get-teams,positive,"""Fetch all teamspaces available in the current Notion environment.""",NTN-TEAM-POS-003
+4,notion-get-user,negative,"""Try to fetch details for a non-existent user ID 'null_user_99'.""",NTN-USR-NEG-004
+5,notion-search,positive,"""Search for any existing database or page containing the keyword 'Project Barie'.""",NTN-SRCH-POS-005
+6,notion-list-agents,positive,"""List all AI agents and integrations that have permission to edit this workspace.""",NTN-AGT-POS-006
+7,notion-create-database,positive,"""Create a new database named 'Sprint Tasks' with properties for 'Owner' and 'Deadline'.""",NTN-CDB-POS-007
+8,notion-update-database,positive,"""Add a new 'Select' property called 'Priority' to the 'Sprint Tasks' database.""",NTN-UDB-POS-008
+9,notion-create-pages,positive,"""Add three new task pages to the 'Sprint Tasks' database for the upcoming week.""",NTN-CPG-POS-009
+10,notion-fetch,positive,"""Fetch the full page content and meta-data for the newly created 'Monday Task' page.""",NTN-FTCH-POS-010
+11,notion-duplicate-page,positive,"""Create a duplicate of the 'Project Template' page to use for a new client.""",NTN-DUP-POS-011
+12,enhanced_markdown_specification,positive,"""Apply advanced formatting to a page using callouts, nested bullets, and a table of contents.""",NTN-MD-POS-012
+13,notion-update-page,positive,"""Update the 'Monday Task' page to set the status to 'Completed' and change the icon.""",NTN-UPG-POS-013
+14,notion-move-pages,positive,"""Move the 'Old Research' page from the 'General' folder into the 'Archive' database.""",NTN-MOVE-POS-014
+15,notion-create-comment,positive,"""Add a comment saying 'Please review the latest update' on the main project page.""",NTN-COMM-POS-015
+16,notion-get-comments,positive,"""Retrieve all comments and discussion threads from the 'Task Review' page.""",NTN-GCM-POS-016
+

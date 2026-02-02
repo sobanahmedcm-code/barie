@@ -28,19 +28,23 @@ def driver(request):
     
     yield driver
     
-    if request.node.rep_call.failed:
-        # Take screenshot on failure
-        screenshot_path = f"screenshot_{request.node.name}_{request.node.rep_call.when}.png"
-        driver.save_screenshot(str(screenshot_path))
+    try:
+        if hasattr(request.node, 'rep_call') and request.node.rep_call.failed:
+            # Take screenshot on failure
+            screenshot_path = f"screenshot_{request.node.name}_{request.node.rep_call.when}.png"
+            driver.save_screenshot(str(screenshot_path))
+    except AttributeError:
+        # If rep_call doesn't exist, just continue
+        pass
     
     driver.quit()
 
 
 @pytest.fixture(scope="function")
 def barie_page(driver):
-    """Create BariePage instance"""
+    """Create BariePage instance and login"""
     page = BariePage(driver)
-    page.navigate_to(BASE_URL)
+    page.login()
     return page
 
 

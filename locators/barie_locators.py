@@ -8,11 +8,18 @@ from selenium.webdriver.common.by import By
 class BarieLocators:
     """All locators for Barie AI application pages"""
     
-    # Main page elements
+    # Login elements
+    EMAIL_FIELD = (By.XPATH, "//*[@id='email-field']")
+    CONTINUE_BUTTON = (By.XPATH, "//*[@id='continue-button']")
+    PASSWORD_FIELD = (By.XPATH, "//*[@id='password-field']")
+    LOGIN_BUTTON = (By.XPATH, "//*[@id='login-button']")
+    
+    # Chat input elements
     PROMPT_INPUT = (By.ID, "prompt-input")
-    PROMPT_TEXTAREA = (By.CSS_SELECTOR, "textarea[placeholder*='prompt' i]")
-    SUBMIT_BUTTON = (By.CSS_SELECTOR, "button[type='submit']")
-    SEND_BUTTON = (By.XPATH, "//button[contains(text(), 'Send') or contains(text(), 'Submit')]")
+    PROMPT_TEXTAREA = (By.CSS_SELECTOR, "textarea")
+    PROMPT_FIELD = (By.XPATH, "//textarea | //input[@type='text'] | //div[@contenteditable='true']")
+    SUBMIT_BUTTON = (By.XPATH, "//*[@id='chat-messages-container']//button[@type='submit']")
+    SEND_BUTTON = (By.XPATH, "//button[contains(text(), 'Send') or contains(text(), 'Submit') or contains(translate(@aria-label, 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'), 'send')]")
     
     # Response elements
     RESPONSE_CONTAINER = (By.ID, "response-container")
@@ -31,6 +38,7 @@ class BarieLocators:
     
     # Error handling
     ERROR_MESSAGE = (By.CSS_SELECTOR, ".error, .error-message, [class*='error']")
+    ACTIVE_CHAT_ERROR = (By.XPATH, "//*[contains(text(), 'You already have an active chat') or contains(text(), 'Only one chat is allowed')]")
     SUCCESS_MESSAGE = (By.CSS_SELECTOR, ".success, .success-message, [class*='success']")
     
     # Modal/Dialog

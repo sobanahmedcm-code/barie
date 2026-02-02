@@ -1,0 +1,32 @@
+step,function_name,test_type,prompt,id
+1,mcp_RC_list_apps,positive,"""List all RevenueCat apps in my project.""",RC-APP-POS-001
+2,mcp_RC_get_app,positive,"""Get details for my RevenueCat app.""",RC-APP-POS-002
+3,mcp_RC_create_app,positive,"""Create a new RevenueCat app named 'MyMobileApp' for iOS platform.""",RC-APP-POS-003
+4,mcp_RC_update_app,positive,"""Update the app configuration to enable analytics tracking.""",RC-APP-POS-004
+5,mcp_RC_delete_app,positive,"""Delete the test app that is no longer needed.""",RC-APP-POS-005
+6,mcp_RC_list_products,positive,"""List all products available in my RevenueCat project.""",RC-PROD-POS-006
+7,mcp_RC_list_product_prices,positive,"""Show me all product prices across different stores and regions.""",RC-PROD-POS-007
+8,mcp_RC_create_product,positive,"""Create a new product called 'premium_monthly' with a monthly subscription.""",RC-PROD-POS-008
+9,mcp_RC_create_product_in_store,positive,"""Create a product 'premium_yearly' in the Apple App Store.""",RC-PROD-POS-009
+10,mcp_RC_create_product_price,positive,"""Set the price for 'premium_monthly' to $9.99 in USD.""",RC-PROD-POS-010
+11,mcp_RC_list_entitlements,positive,"""List all entitlements configured in my RevenueCat project.""",RC-ENT-POS-011
+12,mcp_RC_get_entitlement,positive,"""Get details for the 'premium' entitlement.""",RC-ENT-POS-012
+13,mcp_RC_create_entitlement,positive,"""Create a new entitlement called 'pro_features' for premium users.""",RC-ENT-POS-013
+14,mcp_RC_update_entitlement,positive,"""Update the 'premium' entitlement to include additional features.""",RC-ENT-POS-014
+15,mcp_RC_delete_entitlement,positive,"""Delete the test entitlement that is no longer used.""",RC-ENT-POS-015
+16,mcp_RC_attach_products_to_entitlement,positive,"""Attach the 'premium_monthly' and 'premium_yearly' products to the 'premium' entitlement.""",RC-ENT-POS-016
+17,mcp_RC_detach_products_from_entitlement,positive,"""Remove the 'premium_monthly' product from the 'premium' entitlement.""",RC-ENT-POS-017
+18,mcp_RC_get_products_from_entitlement,positive,"""Show me all products attached to the 'premium' entitlement.""",RC-ENT-POS-018
+19,mcp_RC_list_packages,positive,"""List all packages configured in my RevenueCat offerings.""",RC-PKG-POS-019
+20,mcp_RC_create_package,positive,"""Create a new package called 'starter_pack' for the offering.""",RC-PKG-POS-020
+21,mcp_RC_attach_products_to_package,positive,"""Attach products to the 'starter_pack' package.""",RC-PKG-POS-021
+22,mcp_RC_detach_products_from_package,positive,"""Remove products from the 'starter_pack' package.""",RC-PKG-POS-022
+23,mcp_RC_list_offerings,positive,"""List all offerings available in my RevenueCat project.""",RC-OFF-POS-023
+24,mcp_RC_get_app_store_config,positive,"""Get the App Store configuration for my iOS app.""",RC-CONF-POS-024
+25,mcp_RC_create_offering,positive,"""Create a new offering called 'default_offering' with packages.""",RC-OFF-POS-025
+26,mcp_RC_update_offering,positive,"""Update the 'default_offering' to make it the current offering.""",RC-OFF-POS-026
+27,mcp_RC_create_paywall,positive,"""Create a paywall configuration for the 'default_offering'.""",RC-PW-POS-027
+28,mcp_RC_list_public_api_keys,positive,"""List all public API keys configured for my RevenueCat project.""",RC-KEY-POS-028
+29,mcp_RC_get_project,positive,"""Get details about my RevenueCat project including settings and configuration.""",RC-PROJ-POS-029
+30,mcp_RC_create_project,positive,"""Create a new RevenueCat project for testing purposes.""",RC-PROJ-POS-030
+

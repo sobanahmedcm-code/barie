@@ -1,7 +1,87 @@
-id,prompt,category,expected_keywords,description
-1,What is artificial intelligence?,general,AI,intelligence,machine,Basic AI question
-2,Explain quantum computing,technical,quantum,computing,qubit,Technical question about quantum computing
-3,Write a Python function to reverse a string,coding,Python,function,reverse,Coding request
-4,What are the benefits of cloud computing?,general,cloud,computing,benefits,General technology question
-5,How does machine learning work?,technical,machine,learning,algorithm,Technical ML question
+step,function_name,test_type,prompt,id
+1,clickup_get_workspace_members,positive,"Retrieve all members from the ClickUp workspace.","CGWM-POS-001"
+2,clickup_get_workspace_members,negative,"Try retrieving workspace members with an invalid API key or empty workspace.","CGWM-NEG-002"
 
+3,clickup_find_member_by_name,positive,"Find the ClickUp workspace member with the name 'Ali Khan'.","CFMB-POS-003"
+4,clickup_find_member_by_name,negative,"Try finding a ClickUp member with a name that does not exist.","CFMB-NEG-004"
+
+5,clickup_get_workspace_hierarchy,positive,"Retrieve the complete ClickUp workspace hierarchy including spaces, folders, and lists.","CGWH-POS-005"
+6,clickup_get_workspace_hierarchy,negative,"Try retrieving the workspace hierarchy for a non-existent workspace ID.","CGWH-NEG-006"
+
+7,clickup_create_folder,positive,"Create a new ClickUp folder named 'QA Automation Folder' inside space ID 112233.","CCF-POS-007"
+8,clickup_create_folder,negative,"Attempt to create a folder with an empty name or invalid space ID.","CCF-NEG-008"
+
+9,clickup_get_folder,positive,"Get details of the ClickUp folder with ID 445566.","CGF-POS-009"
+10,clickup_get_folder,negative,"Try getting a folder with an invalid or non-existent folder ID.","CGF-NEG-010"
+
+11,clickup_create_list_in_folder,positive,"Create a ClickUp list named 'Automation Tasks' inside folder ID 445566.","CCLF-POS-011"
+12,clickup_create_list_in_folder,negative,"Attempt to create a list in a folder ID that does not exist.","CCLF-NEG-012"
+
+13,clickup_get_list,positive,"Retrieve details of the ClickUp list with ID 778899.","CGL-POS-013"
+14,clickup_get_list,negative,"Try retrieving a list with an invalid or deleted list ID.","CGL-NEG-014"
+
+15,clickup_create_task,positive,"Create a ClickUp task titled 'Setup automation framework' in list ID 778899 with priority high.","CCT-POS-015"
+16,clickup_create_task,negative,"Attempt to create a task with missing title or invalid list ID.","CCT-NEG-016"
+
+17,clickup_get_task,positive,"Retrieve details of the ClickUp task with ID 123456789.","CGT-POS-017"
+18,clickup_get_task,negative,"Try retrieving a task with a non-existent task ID.","CGT-NEG-018"
+
+19,clickup_create_task_comment,positive,"Add a comment 'Initial setup task created' to the ClickUp task ID 123456789.","CCTC-POS-019"
+20,clickup_create_task_comment,negative,"Attempt to add a comment to a task that does not exist.","CCTC-NEG-020"
+
+21,clickup_add_tag_to_task,positive,"Add a tag named 'automation' to the ClickUp task with ID 123456789.","CATT-POS-021"
+22,clickup_add_tag_to_task,negative,"Try adding a tag to a task with invalid ID or empty tag name.","CATT-NEG-022"
+
+23,clickup_remove_tag_from_task,positive,"Remove the tag 'automation' from the ClickUp task ID 123456789.","CRTT-POS-023"
+24,clickup_remove_tag_from_task,negative,"Attempt to remove a tag that does not exist from a task.","CRTT-NEG-024"
+
+25,clickup_start_time_tracking,positive,"Start time tracking for the ClickUp task ID 123456789.","CSTT-POS-025"
+26,clickup_start_time_tracking,negative,"Try starting time tracking for a non-existent task or invalid user.","CSTT-NEG-026"
+
+27,clickup_get_current_time_entry,positive,"Get the currently running time entry in ClickUp for the logged-in user.","CGCTE-POS-027"
+28,clickup_get_current_time_entry,negative,"Try retrieving the current time entry when no time entry is running.","CGCTE-NEG-028"
+
+29,clickup_add_time_entry,positive,"Add a 45 minute time entry to the ClickUp task ID 123456789 with description 'Framework setup work'.","CATE-POS-029"
+30,clickup_add_time_entry,negative,"Attempt to add a time entry with invalid duration or task ID.","CATE-NEG-030"
+
+31,clickup_stop_time_tracking,positive,"Stop the currently running ClickUp time tracking session.","CSTT-POS-031"
+32,clickup_stop_time_tracking,negative,"Try stopping time tracking when no session is running.","CSTT-NEG-032"
+
+33,clickup_get_task_time_entries,positive,"Retrieve all time entries logged against the ClickUp task ID 123456789.","CGTTE-POS-033"
+34,clickup_get_task_time_entries,negative,"Attempt to retrieve time entries for a task that does not exist.","CGTTE-NEG-034"
+
+35,clickup_create_document,positive,"Create a new ClickUp document named 'Automation Documentation' in the workspace.","CCD-POS-035"
+36,clickup_create_document,negative,"Attempt to create a document with an empty name or invalid workspace ID.","CCD-NEG-036"
+
+37,clickup_create_document_page,positive,"Create a new page titled 'Framework Overview' inside the ClickUp document ID 987654321.","CCDP-POS-037"
+38,clickup_create_document_page,negative,"Try creating a document page in a non-existent document ID.","CCDP-NEG-038"
+
+39,clickup_list_document_pages,positive,"List all pages available in the ClickUp document ID 987654321.","CLDP-POS-039"
+40,clickup_list_document_pages,negative,"Attempt to list pages for a document that does not exist.","CLDP-NEG-040"
+
+41,clickup_update_document_page,positive,"Update the ClickUp document page ID 556677 with new content 'Updated automation framework overview'.","CUDP-POS-041"
+42,clickup_update_document_page,negative,"Try updating a document page that does not exist.","CUDP-NEG-042"
+
+43,clickup_get_document_pages,positive,"Retrieve all pages from the ClickUp document ID 987654321.","CGDP-POS-043"
+44,clickup_get_document_pages,negative,"Attempt to retrieve document pages from a non-existent document ID.","CGDP-NEG-044"
+
+45,clickup_get_task_comments,positive,"Retrieve all comments for the ClickUp task ID 123456789.","CGTC-POS-045"
+46,clickup_get_task_comments,negative,"Try retrieving comments for a task that does not exist.","CGTC-NEG-046"
+
+47,clickup_update_task,positive,"Update the ClickUp task ID 123456789 to set status to 'In Progress'.","CUT-POS-047"
+48,clickup_update_task,negative,"Attempt to update a task that does not exist.","CUT-NEG-048"
+
+49,clickup_update_list,positive,"Update the ClickUp list ID 778899 to change its name to 'Automation Execution Tasks'.","CUL-POS-049"
+50,clickup_update_list,negative,"Attempt to update a list that does not exist.","CUL-NEG-050"
+
+51,clickup_update_folder,positive,"Update the ClickUp folder ID 445566 to rename it to 'QA Automation Sprint'.","CUF-POS-051"
+52,clickup_update_folder,negative,"Attempt to update a folder that does not exist.","CUF-NEG-052"
+
+53,clickup_search,positive,"Search ClickUp for tasks containing the keyword 'automation'.","CS-POS-053"
+54,clickup_search,negative,"Search ClickUp with invalid query or no results expected.","CS-NEG-054"
+
+55,clickup_get_chat_channels,positive,"Retrieve all chat channels from the ClickUp workspace.","CGCC-POS-055"
+56,clickup_get_chat_channels,negative,"Attempt to retrieve chat channels for an invalid workspace.","CGCC-NEG-056"
+
+57,clickup_send_chat_message,positive,"Send a chat message 'Automation task has started' to the ClickUp chat channel ID 334455.","CSCM-POS-057"
+58,clickup_send_chat_message,negative,"Attempt to send a chat message to a non-existent channel or invalid ID.","CSCM-NEG-058"

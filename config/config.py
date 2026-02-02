@@ -22,8 +22,13 @@ EXPLICIT_WAIT = int(os.getenv("EXPLICIT_WAIT", "20"))
 PAGE_LOAD_TIMEOUT = int(os.getenv("PAGE_LOAD_TIMEOUT", "30"))
 
 # Application URLs
-BASE_URL = os.getenv("BASE_URL", "http://localhost:3000")
-AI_ENDPOINT = f"{BASE_URL}/api/ai"
+BASE_URL = os.getenv("BASE_URL", "https://stg.barie.ai")
+LOGIN_URL = f"{BASE_URL}/"
+CHAT_URL = f"{BASE_URL}/chat"
+
+# Login credentials
+LOGIN_EMAIL = os.getenv("LOGIN_EMAIL", "sobanahmed.cm@pf.com.pk")
+LOGIN_PASSWORD = os.getenv("LOGIN_PASSWORD", "10December2025")
 
 # Screenshot settings
 SCREENSHOT_ON_FAILURE = True

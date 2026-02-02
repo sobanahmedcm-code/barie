@@ -1,5 +1,5 @@
 """
-Test suite for Barie AI prompt testing using CSV data
+Test suite for Barie AI prompt testing using CSV data for Notion connector
 """
 import pytest
 import csv
@@ -7,26 +7,42 @@ import json
 import time
 from pathlib import Path
 from utilities.test_helpers import TestHelpers
-from config.config import REPORTS_DIR
+from utilities.csv_handler import CSVHandler
+from config.config import REPORTS_DIR, DATA_DIR
 
 
-class TestBariePrompts:
-    """Test class for testing Barie AI with prompts from CSV"""
+class TestBariePromptsNotion:
+    """Test class for testing Barie AI with prompts from Notion CSV"""
     
-    def test_all_prompts_from_csv(self, barie_page, test_prompts):
-        """Test all prompts from CSV file"""
-        if not test_prompts:
-            pytest.skip("No prompts found in CSV file")
+    @pytest.fixture(scope="function")
+    def notion_prompts(self):
+        """Load test prompts from Notion CSV"""
+        csv_file = DATA_DIR / "test_prompts_notion.csv"
+        handler = CSVHandler(csv_file)
+        return handler.read_prompts()
+    
+    def test_all_prompts_from_notion_csv(self, barie_page, notion_prompts):
+        """Test all prompts from Notion CSV file"""
+        if not notion_prompts:
+            pytest.skip("No prompts found in Notion CSV file")
         
         results = []
         
-        for prompt_data in test_prompts:
+        for prompt_data in notion_prompts:
             if not prompt_data.get('prompt'):
                 continue
-                
+            
+            # Handle quoted prompts
             prompt_text = prompt_data.get('prompt', '').strip()
+            if prompt_text.startswith('"""') and prompt_text.endswith('"""'):
+                prompt_text = prompt_text[3:-3]
+            elif prompt_text.startswith('"') and prompt_text.endswith('"'):
+                prompt_text = prompt_text[1:-1]
+            
             function_name = prompt_data.get('function_name', 'unknown')
             test_type = prompt_data.get('test_type', 'unknown')
+            step = prompt_data.get('step', '')
+            prompt_id = prompt_data.get('id', '')
             
             start_time = time.time()
             status = 'passed'
@@ -65,6 +81,8 @@ class TestBariePrompts:
                 response_time = time.time() - start_time
             
             results.append({
+                'step': step,
+                'id': prompt_id,
                 'function_name': function_name,
                 'actual_function': actual_function or 'N/A',
                 'function_match': 'PASS' if function_match else 'FAIL',
@@ -84,9 +102,9 @@ class TestBariePrompts:
             return
         
         timestamp = time.strftime("%Y%m%d_%H%M%S")
-        results_file = REPORTS_DIR / f"test_results_{timestamp}.csv"
+        results_file = REPORTS_DIR / f"test_results_notion_{timestamp}.csv"
         
-        fieldnames = ['function_name', 'actual_function', 'function_match', 'test_type', 'prompt', 'response', 'response_time_seconds', 'status', 'error']
+        fieldnames = ['step', 'id', 'function_name', 'actual_function', 'function_match', 'test_type', 'prompt', 'response', 'response_time_seconds', 'status', 'error']
         
         with open(results_file, 'w', newline='', encoding='utf-8') as csvfile:
             writer = csv.DictWriter(csvfile, fieldnames=fieldnames)

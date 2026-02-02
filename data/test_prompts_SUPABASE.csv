@@ -1,0 +1,33 @@
+step,function_name,test_type,prompt,id
+1,list_organizations,positive,"""Retrieve a list of all Supabase organizations I have access to.""",SB-ORG-POS-001
+2,get_organization,negative,"""Attempt to fetch details for an organization using an invalid ID 'org_999'.""",SB-ORG-NEG-002
+3,create_project,positive,"""Create a new Supabase project named 'Barie-Backend' in my primary organization.""",SB-PROJ-POS-003
+4,list_projects,positive,"""List all projects currently active in my Supabase account.""",SB-PROJ-POS-004
+5,get_project,positive,"""Retrieve the configuration and status details for the 'Barie-Backend' project.""",SB-PROJ-POS-005
+6,get_project_url,positive,"""Get the API URL for the 'Barie-Backend' project.""",SB-URL-POS-006
+7,get_anon_key,positive,"""Retrieve the anonymous API key for the project to configure client-side access.""",SB-KEY-POS-007
+8,list_tables,positive,"""Fetch a list of all public tables available in the project database.""",SB-TAB-POS-008
+9,execute_sql,positive,"""Run a SQL command to create a 'profiles' table with columns: id, username, and bio.""",SB-SQL-POS-009
+10,execute_sql,negative,"""Try to execute a malformed SQL query like 'SELECT * FROM non_existent_table'.""",SB-SQL-NEG-010
+11,list_extensions,positive,"""List all enabled PostgreSQL extensions, such as pgvector or postgis, in this project.""",SB-EXT-POS-011
+12,list_migrations,positive,"""List all database migrations that have been applied to the current project.""",SB-MIG-POS-012
+13,apply_migration,positive,"""Apply a new migration file to update the database schema for the production environment.""",SB-MIG-POS-013
+14,generate_typescript_types,positive,"""Generate TypeScript definitions based on the current database schema for the frontend.""",SB-TYPE-POS-014
+15,list_edge_functions,positive,"""List all deployed Edge Functions for the project 'Barie-Backend'.""",SB-EDGE-POS-015
+16,deploy_edge_function,positive,"""Deploy a new Edge Function named 'stripe-webhook' to the project.""",SB-EDGE-POS-016
+17,get_edge_function,positive,"""Retrieve the configuration and metadata for the 'stripe-webhook' Edge Function.""",SB-EDGE-POS-017
+18,get_edge_function,negative,"""Try to get details for an Edge Function that does not exist in the project.""",SB-EDGE-NEG-018
+19,create_branch,positive,"""Create a new database branch called 'dev-staging' from the main project.""",SB-BRN-POS-019
+20,list_branches,positive,"""Show me all active database branches for the current project.""",SB-BRN-POS-020
+21,rebase_branch,positive,"""Rebase the 'dev-staging' branch with the latest changes from the production branch.""",SB-BRN-POS-021
+22,merge_branch,positive,"""Merge the 'dev-staging' branch back into the main project.""",SB-BRN-POS-022
+23,reset_branch,negative,"""Attempt to reset a branch that is currently in a 'merging' state.""",SB-BRN-NEG-023
+24,delete_branch,positive,"""Delete the 'dev-staging' branch now that the merge is completed.""",SB-BRN-POS-024
+25,get_logs,positive,"""Retrieve the last 50 error logs from the project's database.""",SB-LOG-POS-025
+26,get_advisors,positive,"""Fetch security and performance recommendations from the Supabase Advisor.""",SB-ADV-POS-026
+27,get_cost,positive,"""Estimate the current monthly cost and resource usage for the project.""",SB-COST-POS-027
+28,confirm_cost,positive,"""Acknowledge and confirm the additional costs for upgrading the project tier.""",SB-COST-POS-028
+29,search_docs,positive,"""Search Supabase documentation for 'Row Level Security' best practices.""",SB-DOC-POS-029
+30,pause_project,positive,"""Pause the project 'Barie-Backend' to stop billing and usage.""",SB-STATE-POS-030
+31,restore_project,positive,"""Restore the 'Barie-Backend' project from its paused state.""",SB-STATE-POS-031
+32,restore_project,negative,"""Attempt to restore a project that has already been permanently deleted.""",SB-STATE-NEG-032

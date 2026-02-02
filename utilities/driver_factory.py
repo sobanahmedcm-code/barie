@@ -40,16 +40,83 @@ class DriverFactory:
     def _create_chrome_driver(headless):
         """Create Chrome WebDriver"""
         options = ChromeOptions()
+        
         if headless:
-            options.add_argument("--headless")
+            options.add_argument("--headless=new")
+        
+        # Core browser options
         options.add_argument("--no-sandbox")
         options.add_argument("--disable-dev-shm-usage")
         options.add_argument("--disable-gpu")
         options.add_argument("--window-size=1920,1080")
         options.add_argument("--start-maximized")
         
-        service = ChromeService(ChromeDriverManager().install())
-        driver = webdriver.Chrome(service=service, options=options)
+        # Disable background networking and Google services
+        options.add_argument("--disable-background-networking")
+        options.add_argument("--disable-background-timer-throttling")
+        options.add_argument("--disable-backgrounding-occluded-windows")
+        options.add_argument("--disable-breakpad")
+        options.add_argument("--disable-client-side-phishing-detection")
+        options.add_argument("--disable-component-update")
+        options.add_argument("--disable-default-apps")
+        options.add_argument("--disable-domain-reliability")
+        options.add_argument("--disable-features=TranslateUI")
+        options.add_argument("--disable-hang-monitor")
+        options.add_argument("--disable-ipc-flooding-protection")
+        options.add_argument("--disable-popup-blocking")
+        options.add_argument("--disable-prompt-on-repost")
+        options.add_argument("--disable-renderer-backgrounding")
+        options.add_argument("--disable-sync")
+        options.add_argument("--disable-web-resources")
+        options.add_argument("--enable-automation")
+        options.add_argument("--enable-features=NetworkService,NetworkServiceLogging")
+        options.add_argument("--force-color-profile=srgb")
+        options.add_argument("--metrics-recording-only")
+        options.add_argument("--mute-audio")
+        options.add_argument("--no-first-run")
+        options.add_argument("--no-default-browser-check")
+        options.add_argument("--no-pings")
+        options.add_argument("--password-store=basic")
+        options.add_argument("--use-mock-keychain")
+        options.add_argument("--disable-notifications")
+        options.add_argument("--disable-infobars")
+        
+        # Reduce log verbosity
+        options.add_argument("--log-level=3")
+        options.add_argument("--silent")
+        options.add_experimental_option("excludeSwitches", ["enable-logging", "enable-automation"])
+        options.add_experimental_option('useAutomationExtension', False)
+        
+        # Disable Google services
+        options.add_argument("--disable-background-downloads")
+        options.add_argument("--disable-extensions")
+        options.add_argument("--disable-plugins-discovery")
+        options.add_argument("--disable-preconnect")
+        options.add_argument("--disable-remote-fonts")
+        options.add_argument("--disable-software-rasterizer")
+        
+        # Performance logging for network interception
+        options.set_capability('goog:loggingPrefs', {'performance': 'ALL'})
+        
+        # Suppress Chrome service logs
+        try:
+            service = ChromeService(ChromeDriverManager().install())
+            service.log_path = 'NUL'  # Windows null device to suppress logs
+        except Exception as e:
+            logger = logging.getLogger(__name__)
+            logger.warning(f"ChromeDriverManager failed: {e}, trying without service")
+            service = None
+        
+        try:
+            if service:
+                driver = webdriver.Chrome(service=service, options=options)
+            else:
+                driver = webdriver.Chrome(options=options)
+        except Exception as e:
+            logger = logging.getLogger(__name__)
+            logger.warning(f"Chrome driver creation failed: {e}")
+            driver = webdriver.Chrome(options=options)
+        
         driver.implicitly_wait(IMPLICIT_WAIT)
         driver.set_page_load_timeout(PAGE_LOAD_TIMEOUT)
         return driver
